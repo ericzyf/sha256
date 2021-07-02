@@ -34,15 +34,15 @@ static const uint32_t K[64] = {
     for (int t = 16; t <= 63; ++t) {                                        \
         W[t] = sigma1(W[t - 2]) + W[t - 7] + sigma0(W[t - 15]) + W[t - 16]; \
     }                                                                       \
-    a = H[0];                                                               \
-    b = H[1];                                                               \
-    c = H[2];                                                               \
-    d = H[3];                                                               \
-    e = H[4];                                                               \
-    f = H[5];                                                               \
-    g = H[6];                                                               \
-    h = H[7];                                                               \
-    for (int t = 0; t <= 63; ++t) {                                         \
+    h = 0x1f83d9abU;                                                        \
+    g = 0x9b05688cU;                                                        \
+    f = 0x510e527fU;                                                        \
+    e = 0x98c7e2a2U + W[0];                                                 \
+    d = 0x3c6ef372U;                                                        \
+    c = 0xbb67ae85U;                                                        \
+    b = 0x6a09e667U;                                                        \
+    a = 0xfc08884dU + W[0];                                                 \
+    for (int t = 1; t <= 63; ++t) {                                         \
         const uint32_t T1 = h + SIGMA1(e) + Ch(e, f, g) + K[t] + W[t];      \
         const uint32_t T2 = SIGMA0(a) + Maj(a, b, c);                       \
         h = g;                                                              \
